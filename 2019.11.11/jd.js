@@ -1,33 +1,50 @@
 auto();
 
-var appName="京东";
-var maxCount = 20;
+const appName = "京东";
+setScreenMetrics(1440, 3040);
+
 launchApp(appName);
 
-var btn = className("android.widget.ImageView").desc("浮层icon").depth(8);
+desc("我的").waitFor();
 
-//btn.waitFor();
-//btn.click();
+click(730, 1780);
 
-var getCoinBtn = descContains("逛逛好");
-var save = desc("投喂包包");
-//var wait = text("好物正预售");
-var wait = text("首页");
-var count = 0;
+sleep(10000);
+click(1086, 2130);
+descContains("可翻倍").waitFor();
+click(1290, 2380);
 
-while(count < maxCount){
-  console.log(1);
-  getCoinBtn.waitFor();
-  getCoinBtn.click();
-  console.log(2);
-  text("首页").waitFor();
-  back();
-  desc("朕知道了").waitFor();
-  desc("朕知道了").click();
-//save.waitFor();
-//save.click();
-//console.log(3);
-  count = count + 1;
-}
+const save = desc("投喂包包");
 
+const taskMap = {
+  逛逛好店: 25,
+  精选好物: 25,
+  精彩会场: 3,
+  好玩互动: 4,
+  看京品推荐: 4
+};
 
+Object.keys(taskMap).forEach(key => {
+  const getCoinBtn = descContains(key);
+  const max = taskMap[key];
+  let count = 0;
+  while (count < max) {
+    getCoinBtn.waitFor();
+    getCoinBtn.click();
+    sleep(5000);
+    back();
+    sleep(2000);
+    desc("朕知道了").waitFor();
+    desc("朕知道了").click();
+    count = count + 1;
+  }
+});
+
+click(735, 640);
+save.waitFor();
+
+save.click();
+back();
+back();
+back();
+back();
