@@ -3,7 +3,9 @@ device.keepScreenDim();
 
 const appName = "手机淘宝";
 const WAIT_TIME = 23000;
+// 逛20个店铺
 let maxCount = 20;
+// 除了逛店铺外的四个任务
 let maxOther = 4;
 
 setScreenMetrics(1440, 3040);

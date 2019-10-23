@@ -16,6 +16,7 @@ click(1290, 2380);
 
 const save = desc("投喂包包");
 
+// 任务和任务数量
 const taskMap = {
   逛逛好店: 25,
   精选好物: 25,
