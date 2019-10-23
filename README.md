@@ -1,4 +1,4 @@
-# auto-task-help
+# auto-task-helper
 
 迫于双十一淘宝京东任务重复性太高，所以借助[Auto.js](https://github.com/hyb1996/Auto.js)（仅支持 Android），写了两个脚本来帮助我们自动完成任务。
 
