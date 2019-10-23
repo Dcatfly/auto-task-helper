@@ -9,7 +9,7 @@ desc("我的").waitFor();
 
 click(730, 1780);
 
-sleep(10000);
+sleep(5000);
 click(1086, 2130);
 descContains("可翻倍").waitFor();
 click(1290, 2380);
