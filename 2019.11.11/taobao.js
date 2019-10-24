@@ -3,10 +3,6 @@ device.keepScreenDim();
 
 const appName = "手机淘宝";
 const WAIT_TIME = 23000;
-// 逛20个店铺
-let maxCount = 20;
-// 除了逛店铺外的几个任务
-let maxOther = 6;
 
 setScreenMetrics(1440, 3040);
 
@@ -36,8 +32,12 @@ const getTask = text => () => {
   sleep(1000);
 };
 
+// 逛20个店铺
+let maxCount = rawInput('请输入"去进店"任务的执行次数', 20);
 loopWorker(getTask("去进店"), maxCount);
 
+// 除了逛店铺外的几个任务
+let maxOther = rawInput('请输入"去浏览"任务的执行次数', 8);
 loopWorker(getTask("去浏览"), maxOther);
 
 device.cancelKeepingAwake();
