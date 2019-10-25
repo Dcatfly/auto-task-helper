@@ -37,7 +37,7 @@ let maxCount = rawInput('请输入"去进店"任务的执行次数', 20);
 loopWorker(getTask("去进店"), maxCount);
 
 // 除了逛店铺外的几个任务
-let maxOther = rawInput('请输入"去浏览"任务的执行次数', 8);
+let maxOther = rawInput('请输入"去浏览"任务的执行次数', 14);
 loopWorker(getTask("去浏览"), maxOther);
 
 device.cancelKeepingAwake();
