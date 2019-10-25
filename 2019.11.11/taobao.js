@@ -3,21 +3,35 @@ device.keepScreenDim();
 
 const appName = "手机淘宝";
 const WAIT_TIME = 23000;
+const _findOne = (selector, timeout, message) => {
+  const isExit = !!message;
+  timeout = timeout || 10000;
+  message = message || "已停止执行，请重新执行";
+  const ret = selector.findOne(timeout);
+  if (!ret) {
+    toast("脚本异常 " + message);
+    isExit && exit();
+  }
+  return ret;
+};
 
 launchApp(appName);
 toast("开启app后如不在首页请手动返回首页。");
 
-const btn = desc("捉猫猫");
-btn.waitFor();
-btn.click();
+const btn = _findOne(desc("捉猫猫"), 5000, "请手动进入活动界面");
+if (btn) {
+  btn.click();
+}
 
-textContains("待兑换红包").waitFor();
 const getCatCoin = className("android.view.View")
   .clickable(true)
   .depth(18)
   .indexInParent(5);
 
-getCatCoin.findOne().click();
+const catCoin = _findOne(getCatCoin, 10000, "请手动点击领猫币");
+if (catCoin) {
+  catCoin.click();
+}
 
 const getTask = text => () => {
   const taskBtn = textContains(text);
@@ -31,10 +45,11 @@ const getTask = text => () => {
 const loopWorker = taskName => {
   const task = getTask(taskName);
   let count = 1;
-  while (text(taskName).exists()) {
-    toast(`开始执行第${count}个"${taskName}"任务`);
+  textContains(taskName).findOne(5000);
+  while (textContains(taskName).exists()) {
+    toast("开始执行第" + count + '个"' + taskName + '"任务');
     task();
-    toast(`已完成第${count}个"${taskName}"任务`);
+    toast("已完成第" + count + '个"' + taskName + '"任务');
     count = count + 1;
   }
 };
