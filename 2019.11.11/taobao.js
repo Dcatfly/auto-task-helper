@@ -5,6 +5,7 @@ const appName = "手机淘宝";
 const WAIT_TIME = 23000;
 
 launchApp(appName);
+toast("开启app后如不在首页请手动返回首页。");
 
 const btn = desc("捉猫猫");
 btn.waitFor();
@@ -45,4 +46,5 @@ loopWorker("去进店");
 // 除了逛店铺外的几个任务
 loopWorker("去浏览");
 
+toast("已执行完全部任务，请检查。");
 device.cancelKeepingAwake();
