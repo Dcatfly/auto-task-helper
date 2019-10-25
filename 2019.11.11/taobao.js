@@ -4,8 +4,6 @@ device.keepScreenDim();
 const appName = "手机淘宝";
 const WAIT_TIME = 23000;
 
-setScreenMetrics(1440, 3040);
-
 launchApp(appName);
 
 const btn = desc("捉猫猫");
@@ -13,31 +11,38 @@ btn.waitFor();
 btn.click();
 
 textContains("待兑换红包").waitFor();
-click(1230, 2300);
+const getCatCoin = className("android.view.View")
+  .clickable(true)
+  .depth(18)
+  .indexInParent(5);
 
-const loopWorker = (fn, loop) => {
-  let count = 0;
-  while (count < loop) {
-    fn();
-    count = count + 1;
-  }
-};
+getCatCoin.findOne().click();
 
 const getTask = text => () => {
   const taskBtn = textContains(text);
-  taskBtn.waitFor();
+  // taskBtn.waitFor();
   taskBtn.click();
   sleep(WAIT_TIME);
   back();
   sleep(1000);
 };
 
+const loopWorker = taskName => {
+  const task = getTask(taskName);
+  let count = 1;
+  while (text(taskName).exists()) {
+    toast(`开始执行第${count}个"${taskName}"任务`);
+    task();
+    toast(`已完成第${count}个"${taskName}"任务`);
+    count = count + 1;
+  }
+};
+
+//text('签到').findOne().click();
 // 逛20个店铺
-let maxCount = rawInput('请输入"去进店"任务的执行次数', 20);
-loopWorker(getTask("去进店"), maxCount);
+loopWorker("去进店");
 
 // 除了逛店铺外的几个任务
-let maxOther = rawInput('请输入"去浏览"任务的执行次数', 14);
-loopWorker(getTask("去浏览"), maxOther);
+loopWorker("去浏览");
 
 device.cancelKeepingAwake();
