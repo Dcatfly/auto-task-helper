@@ -1,13 +1,16 @@
 auto();
 
 const appName = "京东";
+const errorMessageForContinue = "请手动点击以进行下一步";
 setScreenMetrics(1440, 3040);
-const _findOne = (selector, timeout) => {
-  timeout = timeout || 0;
+const _findOne = (selector, timeout, message) => {
+  const isExit = !!message;
+  timeout = timeout || 10000;
+  message = message || "已停止执行，请重新执行";
   const ret = selector.findOne(timeout);
   if (!ret) {
-    toast("脚本异常，已停止执行，请重新运行。");
-    exit();
+    toast("脚本异常 " + message);
+    isExit && exit();
   }
   return ret;
 };
@@ -15,7 +18,7 @@ const _findOne = (selector, timeout) => {
 launchApp(appName);
 toast("开启app后如不在首页请手动返回首页。");
 
-desc("我的").waitFor();
+_findOne(desc("我的"));
 
 const gotoActivityBtn = className("ImageView")
   .clickable(true)
@@ -32,10 +35,16 @@ const getCoinBtn = className("android.view.View")
 
 _findOne(gotoActivityBtn).click();
 
-_findOne(getRedPacketBtn).click();
+const redPacketBtn = _findOne(getRedPacketBtn, 3000, errorMessageForContinue);
+if (redPacketBtn) {
+  redPacketBtn.click();
+}
 
 sleep(1000);
-_findOne(getCoinBtn).click();
+const coinBtn = _findOne(getCoinBtn, 5000, errorMessageForContinue);
+if (coinBtn) {
+  coinBtn.click();
+}
 
 const save = desc("投喂包包");
 
@@ -43,6 +52,7 @@ const save = desc("投喂包包");
 const tasks = ["逛逛好店", "精选好物", "精彩会场", "好玩互动", "看京品推荐"];
 
 tasks.forEach(key => {
+  toast("开始执行" + key + "任务");
   const taskBtn = _findOne(descContains(key));
   const regRet = taskBtn.desc().match(/.*（(\d*)[/](\d*).*/);
   const max = regRet[2] - regRet[1];
