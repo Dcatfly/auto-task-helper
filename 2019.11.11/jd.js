@@ -6,10 +6,11 @@ setScreenMetrics(1440, 3040);
 const _findOne = (selector, timeout, message) => {
   const isExit = !!message;
   timeout = timeout || 10000;
-  message = message || "已停止执行，请重新执行";
+  message = "脚本异常 " + (message || "已停止执行，请重新执行");
   const ret = selector.findOne(timeout);
   if (!ret) {
-    toast("脚本异常 " + message);
+    console.log("L12: ", selector, message);
+    toast(message);
     isExit && exit();
   }
   return ret;
@@ -52,20 +53,20 @@ const save = desc("投喂包包");
 const tasks = ["逛逛好店", "精选好物", "精彩会场", "好玩互动", "看京品推荐"];
 
 tasks.forEach(key => {
-  toast("开始执行" + key + "任务");
+  toastLog("开始执行" + key + "任务");
   const taskBtn = _findOne(descContains(key));
   const regRet = taskBtn.desc().match(/.*（(\d*)[/](\d*).*/);
   const max = regRet[2] - regRet[1];
   let count = 0;
   while (count < max) {
     let backCount = 0;
-    toast("开始执行第（" + (count + 1) + "/" + max + "）个" + key + "任务");
+    toastLog("开始执行第（" + (count + 1) + "/" + max + "）个" + key + "任务");
     taskBtn.click();
     sleep(3000);
     while (!descContains(key).exists()) {
       backCount = backCount + 1;
       if (backCount > 3) {
-        toast("返回任务界面时，脚本异常，已停止执行，请重新执行");
+        toastLog("返回任务界面时，脚本异常，已停止执行，请重新执行");
         exit();
       }
       back();
@@ -83,4 +84,4 @@ back();
 back();
 back();
 back();
-toast("已执行完全部任务，请检查。");
+toastLog("已执行完全部任务，请检查。");
