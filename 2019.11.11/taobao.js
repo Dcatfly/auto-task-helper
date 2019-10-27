@@ -36,8 +36,13 @@ const WAIT_TIME = dialogs.input("请输入任务等待时长", 23000);
 
 const getTask = text => () => {
   const taskBtn = textContains(text);
+  const x = device.width / 2;
+  const y = device.height / 2;
+
   // taskBtn.waitFor();
   taskBtn.click();
+  sleep(2000);
+  gesture(1000, [x, y], [x, 0]);
   sleep(WAIT_TIME);
   back();
   sleep(1000);
