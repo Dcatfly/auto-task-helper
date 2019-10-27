@@ -2,7 +2,6 @@ auto();
 device.keepScreenDim();
 
 const appName = "手机淘宝";
-const WAIT_TIME = 23000;
 const _findOne = (selector, timeout, message) => {
   const isExit = !!message;
   timeout = timeout || 10000;
@@ -33,6 +32,7 @@ const catCoin = _findOne(getCatCoin, 10000, "请手动点击领猫币");
 if (catCoin) {
   catCoin.click();
 }
+const WAIT_TIME = dialogs.input("请输入任务等待时长", 23000);
 
 const getTask = text => () => {
   const taskBtn = textContains(text);
