@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/Dcatfly/auto-task-helper/compare/v1.4.0...v1.5.0) (2019-10-29)
+
+### Features
+
+- jd.js 中更改了进入活动页的选择器。 ([e0bf8f1](https://github.com/Dcatfly/auto-task-helper/commit/e0bf8f18e4996552db27486b94347629b95710e3))
+- taobao.js 中全部任务执行完之后，进行一次自检操作。 ([d7ccd69](https://github.com/Dcatfly/auto-task-helper/commit/d7ccd6965f1c319fcb630d2d61b46d3a163ccfc8))
+
+### Bug Fixes
+
+- 弹窗显示需要手动执行操作时脚本已停止运行。 ([d2107ab](https://github.com/Dcatfly/auto-task-helper/commit/d2107ab27331fbe5375ffaeceb4e4d152d704b18))
+
 ## [1.4.0](https://github.com/Dcatfly/auto-task-helper/compare/v1.3.0...v1.4.0) (2019-10-27)
 
 ### Features
