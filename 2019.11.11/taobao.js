@@ -8,7 +8,7 @@ launchApp(appName);
 toastLog("开启app后如不在首页请手动返回首页。");
 
 const _findOne = (selector, timeout, message) => {
-  const isExit = !!message;
+  const isExit = !message;
   timeout = timeout || 10000;
   message = "脚本异常 " + (message || "已停止执行，请重新执行");
   const ret = selector.findOne(timeout);

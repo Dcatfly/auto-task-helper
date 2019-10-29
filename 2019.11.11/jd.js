@@ -4,7 +4,7 @@ const appName = "京东";
 const errorMessageForContinue = "请手动点击以进行下一步";
 setScreenMetrics(1440, 3040);
 const _findOne = (selector, timeout, message) => {
-  const isExit = !!message;
+  const isExit = !message;
   timeout = timeout || 10000;
   message = "脚本异常 " + (message || "已停止执行，请重新执行");
   const ret = selector.findOne(timeout);
