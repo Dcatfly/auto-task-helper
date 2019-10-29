@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/Dcatfly/auto-task-helper/compare/v1.5.0...v1.5.1) (2019-10-29)
+
+### Bug Fixes
+
+- 修复“去浏览”任务未执行。 ([31380e2](https://github.com/Dcatfly/auto-task-helper/commit/31380e2faf2069409aa69909a153dbe603f80e5d))
+
 ## [1.5.0](https://github.com/Dcatfly/auto-task-helper/compare/v1.4.0...v1.5.0) (2019-10-29)
 
 ### Features
