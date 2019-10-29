@@ -2,6 +2,11 @@ auto();
 device.keepScreenDim();
 
 const appName = "手机淘宝";
+let WAIT_TIME;
+
+launchApp(appName);
+toastLog("开启app后如不在首页请手动返回首页。");
+
 const _findOne = (selector, timeout, message) => {
   const isExit = !!message;
   timeout = timeout || 10000;
@@ -14,25 +19,6 @@ const _findOne = (selector, timeout, message) => {
   }
   return ret;
 };
-
-launchApp(appName);
-toastLog("开启app后如不在首页请手动返回首页。");
-
-const btn = _findOne(desc("捉猫猫"), 5000, "请手动进入活动界面");
-if (btn) {
-  btn.click();
-}
-
-const getCatCoin = className("android.view.View")
-  .clickable(true)
-  .depth(18)
-  .indexInParent(5);
-
-const catCoin = _findOne(getCatCoin, 10000, "请手动点击领猫币");
-if (catCoin) {
-  catCoin.click();
-}
-const WAIT_TIME = dialogs.input("请输入任务等待时长", 23000);
 
 const getTask = text => () => {
   const taskBtn = textContains(text);
@@ -60,12 +46,45 @@ const loopWorker = taskName => {
   }
 };
 
-//text('签到').findOne().click();
-// 逛20个店铺
-loopWorker("去进店");
+const autoEnterTask = () => {
+  const getCatBtn = className("FrameLayout")
+    .clickable(true)
+    .depth(12)
+    .indexInParent(6);
+  const btn = _findOne(getCatBtn, 5000, "请手动进入活动界面");
+  if (btn) {
+    btn.click();
+  }
 
-// 除了逛店铺外的几个任务
-loopWorker("去浏览");
+  const getCatCoin = className("android.view.View")
+    .clickable(true)
+    .depth(18)
+    .indexInParent(5);
+
+  const catCoin = _findOne(getCatCoin, 10000, "请手动点击领猫币");
+  if (catCoin) {
+    catCoin.click();
+  }
+
+  WAIT_TIME = WAIT_TIME || dialogs.input("请输入任务等待时长", 23000);
+  //text('签到').findOne().click();
+  // 逛20个店铺
+  loopWorker("去进店");
+
+  // 除了逛店铺外的几个任务
+  //   loopWorker("去浏览");
+};
+
+const checkTask = () => {
+  toastLog("已执行完全部任务，即将执行自动检查。");
+  sleep(1000);
+  back();
+  autoEnterTask();
+};
+
+autoEnterTask();
+checkTask();
 
 toastLog("已执行完全部任务，请检查。");
+
 device.cancelKeepingAwake();
