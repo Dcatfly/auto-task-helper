@@ -72,7 +72,7 @@ const autoEnterTask = () => {
   loopWorker("去进店");
 
   // 除了逛店铺外的几个任务
-  //   loopWorker("去浏览");
+  loopWorker("去浏览");
 };
 
 const checkTask = () => {
