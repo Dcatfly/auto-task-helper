@@ -25,10 +25,7 @@ const gotoActivityBtn = className("ImageView")
   .clickable(true)
   .depth(11)
   .indexInParent(2);
-const getRedPacketBtn = className("android.view.View")
-  .clickable(true)
-  .depth(14)
-  .indexInParent(1);
+const getRedPacketBtn = desc("全民养红包");
 const getCoinBtn = className("android.view.View")
   .clickable(true)
   .depth(15)
