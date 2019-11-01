@@ -49,14 +49,14 @@ const loopWorker = taskName => {
 const autoEnterTask = () => {
   const getCatBtn = className("FrameLayout")
     .clickable(true)
-    .depth(12)
-    .indexInParent(6);
+    .depth(11)
+    .indexInParent(1);
   const btn = _findOne(getCatBtn, 5000, "请手动进入活动界面");
   if (btn) {
     btn.click();
   }
 
-  const getCatCoin = className("android.view.View")
+  const getCatCoin = className("Button")
     .clickable(true)
     .depth(18)
     .indexInParent(5);
